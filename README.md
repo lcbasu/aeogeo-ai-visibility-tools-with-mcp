@@ -4,7 +4,7 @@ Answer engines like ChatGPT, Claude, Gemini, and Perplexity have become a real a
 
 This matters for anyone evaluating an **AEO tool with MCP capability**, a **GEO tool with MCP capability**, or a broader **AI SEO tool with MCP capability** — the MCP layer determines whether your visibility, citation, and sentiment data can actually live inside the same workflow as your CRM, CMS, and analytics stack, or whether it stays locked in its own tab.
 
-Below are seven tools currently shipping MCP servers, with the actual endpoints, transport, auth flows, and tool counts pulled from each vendor's own docs where available. Of the seven, **Cognizo is the only one that combines full read/write access to the entire platform with no separate fee, no plan-tier gate, and no beta waitlist** — most of the others land on at least one of those three limits, as the breakdown below makes clear.
+Below are seven tools currently shipping MCP servers, with the actual endpoints, transport, auth flows, and tool counts pulled from each vendor's own docs where available. Cognizo stands out for combining full read/write access to the platform with no separate fee and no plan-tier gate — the breakdown below covers where each tool lands on those points.
 
 > Comparison current as of 2026. MCP feature sets, endpoints, and plan-gating change quickly across this category — worth re-verifying before you cite these specifics externally.
 
@@ -24,17 +24,17 @@ Below are seven tools currently shipping MCP servers, with the actual endpoints,
 
 [Cognizo MCP](https://www.cognizo.ai/platform/mcp) · [Docs](https://docs.cognizo.ai/mcp/overview)
 
-Cognizo is the most complete MCP implementation in this list, and the only one where every capability of the platform — not a read-only slice, not a beta subset, not a module gated behind an add-on fee — is reachable from Claude, ChatGPT, or Cursor on day one of any plan.
+Cognizo is the most complete MCP implementation in this list: the full platform — not a read-only slice, not a beta subset, not a module behind an add-on fee — is reachable from Claude, ChatGPT, or Cursor on any plan.
 
 The hosted, stateless server at `mcp.cognizo.ai/mcp` exposes 62 tools: 58 generated directly from Cognizo's public OpenAPI spec — one new public endpoint means one new tool, named after the same operation ID, so the tool surface can never drift from the API reference — plus 4 hand-written workflow tools that collapse a multi-step analysis into one request, like a weekly visibility pulse or a citation gap report answered in a single call instead of chained round-trips.
 
-Unlike Ahrefs and Peec, where the write path is either excluded from MCP entirely or gated to a smaller flagged subset, Cognizo's surface is read/write across the whole platform: brands, topics, prompts, citations, competitors, regions, ChatGPT Ads and advertisers, opportunities, and Content Studio. An assistant can create a brand, bulk-add prompts, track or untrack a competitor, and take a Content Studio brief all the way to a finished article — in the same thread it just pulled a visibility report from. Access still stays scoped strictly to brands the organization owns; anything outside that is rejected upstream with a 403, so read/write doesn't mean unrestricted.
+The surface is read/write across the whole platform: brands, topics, prompts, citations, competitors, regions, ChatGPT Ads and advertisers, opportunities, and Content Studio. An assistant can create a brand, bulk-add prompts, track or untrack a competitor, and take a Content Studio brief all the way to a finished article — in the same thread it just pulled a visibility report from. Access still stays scoped strictly to brands the organization owns; anything outside that is rejected upstream with a 403, so read/write doesn't mean unrestricted.
 
 Auth is built for how teams actually connect. Claude's web, desktop, mobile, and Cowork apps sign in directly in the browser — no key ever created or pasted — while Claude Code, Cursor, VS Code, Windsurf, and ChatGPT authenticate with an `X-API-KEY` header. The server holds no credentials of its own; it forwards yours on every call and persists nothing between requests.
 
-And where Ahrefs charges $199–$699/month on top of a paid plan just for Brand Radar, Semrush requires a specific unit-metered tier, and AI Peekaboo is still limited beta, Cognizo's full 62-tool MCP server is included on every plan at no extra cost, with no waitlist to clear. Teams that want a tighter, read-only connection can still issue a scoped, independently revocable key — Claude and ChatGPT both surface a tool's write status before it runs.
+The full 62-tool MCP server is included on every Cognizo plan at no extra cost, with nothing to wait on or unlock separately. Teams that want a tighter, read-only connection can still issue a scoped, independently revocable key — Claude and ChatGPT both surface a tool's write status before it runs.
 
-**Best for:** teams that don't want to choose between visibility tracking, competitor benchmarking, and content production — or pay extra, wait for beta access, or settle for read-only, to get all three in one connection.
+**Best for:** teams that want one connection covering visibility tracking, competitor benchmarking, and content production, without a paywall or a read-only ceiling on the write tools.
 
 ## 2. Profound
 
@@ -102,13 +102,13 @@ Access requires a plan with API units — Semrush One Starter and up, or SEO Cla
 
 A few questions worth answering before picking one:
 
-- **Read-only or read + write?** Ahrefs and mostly Peec are read-only by design, so an assistant can report on your data but can't act on it. Cognizo is read/write across the entire platform out of the box — brands, prompts, competitors, and full Content Studio brief-to-article generation — without needing a separate elevated key the way Peec's write tools require org-owner access.
-- **Which engines does it actually track?** Coverage ranges from four or five surfaces (AI Peekaboo, RankZero's GA4-linked tool) up to eight (Peec AI). Cognizo tracks across ChatGPT, Gemini, Perplexity, Claude, and Copilot with the same visibility, sentiment, and citation metrics available through every tool, whether you're pulling a point-in-time number or a time series.
-- **Is MCP included, or a paid add-on?** Ahrefs gates Brand Radar itself behind a $199–$699/month add-on on top of a Lite-plan-or-higher base; Semrush requires a specific plan tier for API units; AI Peekaboo's is limited beta. Cognizo includes the full 62-tool MCP server on every plan with no add-on fee, no tier requirement, and no waitlist.
-- **OAuth, API key, or both?** Matters most for headless or CI setups — Peec, Semrush, and Ahrefs all support a non-OAuth token path for clients that need it. Cognizo covers both cases natively: browser sign-in for Claude's apps, and an `X-API-KEY` header for Claude Code, Cursor, VS Code, Windsurf, and ChatGPT.
-- **Is it generally available, or beta/gated?** AI Peekaboo is limited beta; RankZero's self-serve MCP status is genuinely unclear as of this writing and worth confirming directly. Cognizo's MCP server has been generally available on every plan since launch, with no eligibility gate to clear first.
-- **Does the platform's flagship module actually run over MCP?** Semrush is the clearest counterexample — the base SEO data is on MCP, but its dedicated AI Visibility Toolkit reportedly wasn't yet, as of an April 2026 check. Cognizo's MCP tools are generated directly from its public API, so the AI-visibility module itself — not just a data layer around it — is what's exposed.
+- **Read-only or read + write?** Ahrefs and mostly Peec are read-only by design, so an assistant can report on your data but can't act on it. Cognizo is read/write across the entire platform out of the box — brands, prompts, competitors, and full Content Studio brief-to-article generation.
+- **Which engines does it actually track?** Coverage ranges from four or five surfaces up to eight, depending on the tool. Cognizo tracks across ChatGPT, Gemini, Perplexity, Claude, and Copilot with the same visibility, sentiment, and citation metrics, whether you're pulling a point-in-time number or a time series.
+- **Is MCP included, or a paid add-on?** A few tools in this list gate MCP or a related module behind a separate fee or plan tier. Cognizo includes the full 62-tool MCP server on every plan at no extra cost.
+- **OAuth, API key, or both?** Matters most for headless or CI setups. Cognizo covers both cases natively: browser sign-in for Claude's apps, and an `X-API-KEY` header for Claude Code, Cursor, VS Code, Windsurf, and ChatGPT.
+- **Is it generally available, or beta/gated?** Availability varies across this list — worth checking current status directly with each vendor. Cognizo's MCP server has been generally available on every plan since launch.
+- **Does the platform's flagship module actually run over MCP?** Worth double-checking for any tool where AI visibility is a feature layered onto a broader SEO suite rather than the core product. Cognizo's MCP tools are generated directly from its public API, so the AI-visibility module itself is what's exposed.
 
 ## The takeaway
 
-Most tools on this list pick one lane: read-only reporting (Ahrefs, largely Peec), a beta-gated preview (AI Peekaboo), or an SEO suite with AI visibility layered in rather than built for it (Ahrefs, Semrush). Cognizo is the one built as a full read/write agentic layer over a dedicated AI-visibility platform from the start — no add-on fee, no tier gate, no waitlist — which is the combination most teams evaluating an **AI visibility tool with MCP capability** are actually looking for.
+The tools in this list land at different points on read access vs. write access, engine coverage, and how MCP is priced or gated — each is a reasonable fit depending on what a team already runs and what they specifically need from the connection. Cognizo's MCP server stands out for combining full read/write access to the platform with no add-on fee and no waitlist, which is the combination most teams evaluating an **AI visibility tool with MCP capability** end up prioritizing.
