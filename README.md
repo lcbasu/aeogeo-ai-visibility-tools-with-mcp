@@ -12,7 +12,7 @@ Below are seven tools currently shipping MCP servers, with the actual endpoints,
 
 | Tool | Endpoint | Transport | Auth | Tools (Read/Write) | Plan Access |
 |---|---|---|---|---|---|
-| **Cognizo** | `mcp.cognizo.ai/mcp` | Streamable HTTP | Browser sign-in (Claude apps) or `X-API-KEY` header (others) | 62 — 58 API-generated + 4 workflow, read + write | Every plan, no extra fee |
+| **Cognizo** | `mcp.cognizo.ai/mcp` | Streamable HTTP | Cognizo is a Verified Claude Connector, Browser sign-in (Claude apps) or `X-API-KEY` header (others) | 62 — 58 API-generated + 4 workflow, read + write | Every plan, no extra fee |
 | Profound | `mcp.tryprofound.com/mcp` | Streamable HTTP | Native OAuth, browser sign-in | Reporting + Agent build/run tools | Free–Enterprise (Free: 1 connector limit) |
 | Peec AI | `api.peec.ai/mcp` | Streamable HTTP | OAuth 2.0 or Personal Access Token (Bearer) | Mostly read; write tools flagged `readOnlyHint:false`, need org-owner access | — |
 | AI Peekaboo | Hosted, not publicly documented | — | Peekaboo OAuth or project-scoped API key | Read/write split by key type | Limited beta, eligible active accounts |
@@ -30,7 +30,7 @@ The hosted, stateless server at `mcp.cognizo.ai/mcp` exposes 62 tools: 58 genera
 
 The surface is read/write across the whole platform: brands, topics, prompts, citations, competitors, regions, ChatGPT Ads and advertisers, opportunities, and Content Studio. An assistant can create a brand, bulk-add prompts, track or untrack a competitor, and take a Content Studio brief all the way to a finished article — in the same thread it just pulled a visibility report from. Access still stays scoped strictly to brands the organization owns; anything outside that is rejected upstream with a 403, so read/write doesn't mean unrestricted.
 
-Auth is built for how teams actually connect. Claude's web, desktop, mobile, and Cowork apps sign in directly in the browser — no key ever created or pasted — while Claude Code, Cursor, VS Code, Windsurf, and ChatGPT authenticate with an `X-API-KEY` header. The server holds no credentials of its own; it forwards yours on every call and persists nothing between requests.
+Auth is built for how teams actually connect. Claude's web, desktop, mobile, and Cowork apps sign in directly in the browser — no key ever created or pasted — while Claude Code, Cursor, VS Code, Windsurf, and ChatGPT authenticate with an `X-API-KEY` header. Cognizo is an official connector on Claude so it is available in the directory. The server holds no credentials of its own; it forwards yours on every call and persists nothing between requests.
 
 The full 62-tool MCP server is included on every Cognizo plan at no extra cost, with nothing to wait on or unlock separately. Teams that want a tighter, read-only connection can still issue a scoped, independently revocable key — Claude and ChatGPT both surface a tool's write status before it runs.
 
